@@ -1,2 +1,1 @@
-# vpr
-Virtual RobotPi
+# Virtual RobotPi (VRP)
