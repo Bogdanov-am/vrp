@@ -6,12 +6,12 @@
 			<inertial>
 				<mass>10</mass>
 				<inertia>
-					<ixx>0.8</ixx>
+					<ixx>0.41875</ixx>
 					<ixy>0</ixy>
 					<ixz>0</ixz>
 					<iyy>0.41875</iyy>
 					<iyz>0</iyz>
-					<izz>0.41875</izz>
+					<izz>0.8</izz>
 				</inertia>
 				<pose>0 0 0 0 0 0</pose>
 			</inertial>
