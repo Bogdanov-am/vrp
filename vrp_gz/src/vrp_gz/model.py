@@ -17,9 +17,10 @@ import sdformat13 as sdf
 
 from ament_index_python.packages import get_package_share_directory
 
-
 import vrp_gz.bridges
 import vrp_gz.payload_bridges
+
+import os
 
 UAVS = []
 
@@ -95,17 +96,10 @@ class Model:
         self.payload = payload
 
     def generate(self):
-        # TODO: здесь sdf
-        model_sdf = 'sdf'
-
-        # parse sdf for payloads if model is urdf
-        if self.urdf != '':
-            self.payload = self.payload_from_sdf(model_sdf)
-
-        # for debugging generated sdf file
-        # with open('/tmp/wamv.sdf', 'w') as f:
-        #     f.write(model_sdf)
-        # print(command)
+        path_sdf = os.path.join(get_package_share_directory('vrp_gz'), 'models', self.model_name, 'model.sdf')
+        f = open(path_sdf, 'r')
+        model_sdf = f.read()
+        self.payload = self.payload_from_sdf(model_sdf)
 
         return model_sdf
 

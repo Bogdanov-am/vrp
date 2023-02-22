@@ -83,7 +83,7 @@ def spawn(sim_mode, world_name, models, robot=None):
             launch_processes.append(gz_spawn_entity)
 
         if sim_mode == 'full' or sim_mode == 'bridge':
-            bridges, nodes, custom_launches = model.bridges(world_name)
+            bridges, nodes, custom_launches = model.bridges()
 
             payload = model.payload_bridges(world_name)
             payload_bridges = payload[0]

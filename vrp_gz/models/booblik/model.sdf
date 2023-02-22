@@ -1,0 +1,425 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+	<model name='booblik'>
+		<!-- База бублика -->
+		<link name='base_link'>
+			<inertial>
+				<mass>10</mass>
+				<inertia>
+					<ixx>0.8</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.41875</iyy>
+					<iyz>0</iyz>
+					<izz>0.41875</izz>
+				</inertia>
+				<pose>0 0 0 0 0 0</pose>
+			</inertial>
+			<collision name='main_body'>
+				<geometry>
+					<cylinder>
+						<radius>0.45</radius>
+						<length>0.15</length>
+					</cylinder>
+				</geometry>
+				<pose>0 0 0.075 0 0 0</pose>
+				<surface>
+					<friction>
+						<ode />
+					</friction>
+					<bounce />
+					<contact />
+				</surface>
+			</collision>
+			<visual name='visual'>
+				<geometry>
+					<mesh>
+						<uri>file:///model://booblik/meshes/booblik.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<pose>0 0 0 0 0 3.141592654</pose>
+			<sensor name='navsat' type='navsat'>
+				<always_on>true</always_on>
+				<update_rate>10</update_rate>
+				<gps/>
+			</sensor>
+			<sensor name='imu' type='imu'>
+				<pose>0 0 0 0 0 0</pose>
+				<update_rate>20</update_rate>
+				<enable_metrics>false</enable_metrics>
+				<imu>
+					<orientation_reference_frame>
+						<localization>CUSTOM</localization>
+						<custom_rpy>0 0 0</custom_rpy>
+						<grav_dir_x>1 0 0</grav_dir_x>
+					</orientation_reference_frame>
+					<angular_velocity>
+						<x>
+							<noise type='gaussian'>
+								<mean>0</mean>
+								<stddev>0.0089999999999999993</stddev>
+								<bias_mean>0.00075000000000000002</bias_mean>
+								<bias_stddev>0.0050000000000000001</bias_stddev>
+								<dynamic_bias_stddev>2.0000000000000002e-05</dynamic_bias_stddev>
+								<dynamic_bias_correlation_time>400</dynamic_bias_correlation_time>
+								<precision>0.00025000000000000001</precision>
+							</noise>
+						</x>
+						<y>
+							<noise type='gaussian'>
+								<mean>0</mean>
+								<stddev>0.0089999999999999993</stddev>
+								<bias_mean>0.00075000000000000002</bias_mean>
+								<bias_stddev>0.0050000000000000001</bias_stddev>
+								<dynamic_bias_stddev>2.0000000000000002e-05</dynamic_bias_stddev>
+								<dynamic_bias_correlation_time>400</dynamic_bias_correlation_time>
+								<precision>0.00025000000000000001</precision>
+							</noise>
+						</y>
+						<z>
+							<noise type='gaussian'>
+								<mean>0</mean>
+								<stddev>0.0089999999999999993</stddev>
+								<bias_mean>0.00075000000000000002</bias_mean>
+								<bias_stddev>0.0050000000000000001</bias_stddev>
+								<dynamic_bias_stddev>2.0000000000000002e-05</dynamic_bias_stddev>
+								<dynamic_bias_correlation_time>400</dynamic_bias_correlation_time>
+								<precision>0.00025000000000000001</precision>
+							</noise>
+						</z>
+					</angular_velocity>
+					<linear_acceleration>
+						<x>
+							<noise type='gaussian'>
+								<mean>0</mean>
+								<stddev>0.021000000000000001</stddev>
+								<bias_mean>0.050000000000000003</bias_mean>
+								<bias_stddev>0.0074999999999999997</bias_stddev>
+								<dynamic_bias_stddev>0.00037500000000000001</dynamic_bias_stddev>
+								<dynamic_bias_correlation_time>175</dynamic_bias_correlation_time>
+								<precision>0.0050000000000000001</precision>
+							</noise>
+						</x>
+						<y>
+							<noise type='gaussian'>
+								<mean>0</mean>
+								<stddev>0.021000000000000001</stddev>
+								<bias_mean>0.050000000000000003</bias_mean>
+								<bias_stddev>0.0074999999999999997</bias_stddev>
+								<dynamic_bias_stddev>0.00037500000000000001</dynamic_bias_stddev>
+								<dynamic_bias_correlation_time>175</dynamic_bias_correlation_time>
+								<precision>0.0050000000000000001</precision>
+							</noise>
+						</y>
+						<z>
+							<noise type='gaussian'>
+								<mean>0</mean>
+								<stddev>0.021000000000000001</stddev>
+								<bias_mean>0.050000000000000003</bias_mean>
+								<bias_stddev>0.0074999999999999997</bias_stddev>
+								<dynamic_bias_stddev>0.00037500000000000001</dynamic_bias_stddev>
+								<dynamic_bias_correlation_time>175</dynamic_bias_correlation_time>
+								<precision>0.0050000000000000001</precision>
+							</noise>
+						</z>
+					</linear_acceleration>
+					<enable_orientation>true</enable_orientation>
+				</imu>
+			</sensor>
+			<sensor name='camera' type='camera'>
+				<pose>-0.288468360 0 0.248385619 0 0.190349541 3.141592654</pose>
+				<topic>__default__</topic>
+				<update_rate>24</update_rate>
+				<enable_metrics>false</enable_metrics>
+				<visualize>true</visualize>
+				<camera name='camera'>
+					<pose>0 0 0 0 0 0</pose>
+					<horizontal_fov>1.3962634</horizontal_fov>
+					<image>
+						<width>1280</width>
+						<height>720</height>
+						<format>RGB_INT8</format>
+						<anti_aliasing>4</anti_aliasing>
+					</image>
+					<camera_info_topic>camera_info</camera_info_topic>
+					<trigger_topic></trigger_topic>
+					<triggered>false</triggered>
+					<clip>
+						<near>0.050000000000000003</near>
+						<far>300</far>
+					</clip>
+					<save enabled='false'>
+						<path>__default__</path>
+					</save>
+					<visibility_mask>4294967295</visibility_mask>
+					<noise>
+						<type>gaussian</type>
+						<mean>0</mean>
+						<stddev>0.0070000000000000001</stddev>
+					</noise>
+					<distortion>
+						<k1>0</k1>
+						<k2>0</k2>
+						<k3>0</k3>
+						<p1>0</p1>
+						<p2>0</p2>
+						<center>0.5 0.5</center>
+					</distortion>
+					<lens>
+						<type>stereographic</type>
+						<scale_to_hfov>true</scale_to_hfov>
+						<cutoff_angle>1.5707963267948966</cutoff_angle>
+						<env_texture_size>256</env_texture_size>
+					</lens>
+					<optical_frame_id></optical_frame_id>
+				</camera>
+			</sensor>
+			<enable_wind>false</enable_wind>
+		</link>
+		<link name='left_propeller_link'>
+			<pose>0.140000000 0.242487113 -0.082455806 0 1.570796327 2.617993878</pose>
+			<inertial>
+				<pose>0 0 0 0 0 0</pose>
+				<mass>0.1</mass>
+				<inertia>
+					<ixx>0.000009333</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.000009333</iyy>
+					<iyz>0</iyz>
+					<izz>0.000018</izz>
+				</inertia>
+			</inertial>
+			<collision name='collision'>
+				<geometry>
+					<cylinder>
+						<radius>0.06</radius>
+						<length>0.03</length>
+					</cylinder>
+				</geometry>
+				<surface>
+					<friction>
+						<ode/>
+					</friction>
+					<bounce/>
+					<contact/>
+				</surface>
+			</collision>
+			<visual name='visual'>
+				<pose>0 0 -0.01 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>file:///model://booblik/meshes/prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<enable_wind>false</enable_wind>
+		</link>
+		<joint name='left_engine_propeller_joint' type='revolute'>
+			<pose>0 0 0 0 0 0</pose>
+			<parent>base_link</parent>
+			<child>left_propeller_link</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+				<limit>
+					<lower>-inf</lower>
+					<upper>inf</upper>
+					<effort>100</effort>
+					<velocity>100</velocity>
+					<stiffness>100000000</stiffness>
+					<dissipation>1</dissipation>
+				</limit>
+				<dynamics>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+					<damping>0.050000000000000003</damping>
+					<friction>0.050000000000000003</friction>
+				</dynamics>
+			</axis>
+		</joint>
+		<link name='right_propeller_link'>
+			<pose>0.140000000 -0.242487113 -0.082455806 0 1.570796327 0.523598775</pose>
+			<inertial>
+				<pose>0 0 0 0 0 0</pose>
+				<mass>0.1</mass>
+				<inertia>
+					<ixx>0.000009333</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.000009333</iyy>
+					<iyz>0</iyz>
+					<izz>0.000018</izz>
+				</inertia>
+			</inertial>
+			<collision name='collision'>
+				<geometry>
+					<cylinder>
+						<radius>0.06</radius>
+						<length>0.03</length>
+					</cylinder>
+				</geometry>
+				<surface>
+					<friction>
+						<ode/>
+					</friction>
+					<bounce/>
+					<contact/>
+				</surface>
+			</collision>
+			<visual name='visual'>
+				<pose>0 0 -0.01 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>file:///model://booblik/meshes/prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<enable_wind>false</enable_wind>
+		</link>
+		<joint name='right_engine_propeller_joint' type='revolute'>
+			<pose>0 0 0 0 0 0</pose>
+			<parent>base_link</parent>
+			<child>right_propeller_link</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+				<limit>
+					<lower>-inf</lower>
+					<upper>inf</upper>
+					<effort>100</effort>
+					<velocity>100</velocity>
+					<stiffness>100000000</stiffness>
+					<dissipation>1</dissipation>
+				</limit>
+				<dynamics>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+					<damping>0.050000000000000003</damping>
+					<friction>0.050000000000000003</friction>
+				</dynamics>
+			</axis>
+		</joint>
+		<link name='back_propeller_link'>
+			<pose>-0.280 0 -0.082455806 0 1.570796327 -1.570796326</pose>
+			<inertial>
+				<pose>0 0 0 0 0 0</pose>
+				<mass>0.1</mass>
+				<inertia>
+					<ixx>0.000009333</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.000009333</iyy>
+					<iyz>0</iyz>
+					<izz>0.000018</izz>
+				</inertia>
+			</inertial>
+			<collision name='collision'>
+				<geometry>
+					<cylinder>
+						<radius>0.06</radius>
+						<length>0.03</length>
+					</cylinder>
+				</geometry>
+				<surface>
+					<friction>
+						<ode/>
+					</friction>
+					<bounce/>
+					<contact/>
+				</surface>
+			</collision>
+			<visual name='visual'>
+				<pose>0 0 -0.01 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>file:///model://booblik/meshes/prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<enable_wind>false</enable_wind>
+		</link>
+		<joint name='back_engine_propeller_joint' type='revolute'>
+			<pose>0 0 0 0 0 0</pose>
+			<parent>base_link</parent>
+			<child>back_propeller_link</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+				<limit>
+					<lower>-inf</lower>
+					<upper>inf</upper>
+					<effort>100</effort>
+					<velocity>100</velocity>
+					<stiffness>100000000</stiffness>
+					<dissipation>1</dissipation>
+				</limit>
+				<dynamics>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+					<damping>0.050000000000000003</damping>
+					<friction>0.050000000000000003</friction>
+				</dynamics>
+			</axis>
+		</joint>
+		<static>false</static>
+		<self_collide>false</self_collide>
+		<plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
+			<fluid_density>1000</fluid_density>
+			<fluid_level>0.0</fluid_level>
+			<linear_drag>10.0</linear_drag>
+			<angular_drag>6.0</angular_drag>
+			<buoyancy name="main_body_buoyancy">
+				<link_name>base_link</link_name>
+				<pose>0 0 0.075 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<radius>0.45</radius>
+						<length>0.15</length>
+					</cylinder>
+				</geometry>
+			</buoyancy>
+			<wavefield>
+				<size>1000 1000</size>
+				<cell_count>50 50></cell_count>
+				<wave>
+					<model>PMS</model>
+					<period>5.0</period>
+					<number>3</number>
+					<scale>1.1</scale>
+					<gain>0.3</gain>
+					<direction>1 0</direction>
+					<angle>0.4</angle>
+					<tau>2.0</tau>
+					<amplitude>0.0</amplitude>
+					<steepness>0.0</steepness>
+				</wave>
+			</wavefield>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<joint_name>left_engine_propeller_joint</joint_name>
+			<thrust_coefficient>0</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.06</propeller_diameter>
+			<max_thrust_cmd>20</max_thrust_cmd>
+			<min_thrust_cmd>-20</min_thrust_cmd>
+			<topic>thrusters/left/thrust</topic>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<joint_name>right_engine_propeller_joint</joint_name>
+			<thrust_coefficient>0</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.06</propeller_diameter>
+			<max_thrust_cmd>20</max_thrust_cmd>
+			<min_thrust_cmd>-20</min_thrust_cmd>
+			<topic>thrusters/right/thrust</topic>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<joint_name>back_engine_propeller_joint</joint_name>
+			<thrust_coefficient>0</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.06</propeller_diameter>
+			<max_thrust_cmd>20</max_thrust_cmd>
+			<min_thrust_cmd>-20</min_thrust_cmd>
+			<topic>thrusters/back/thrust</topic>
+		</plugin>
+	</model>
+</sdf>
