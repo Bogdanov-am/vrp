@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'manual = vrp_comp.manual_control:main',
+            'test = vrp_comp.do_task:main',
         ],
     },
 )

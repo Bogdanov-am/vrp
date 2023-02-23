@@ -30,7 +30,7 @@ def launch(context, *args, **kwargs):
     launch_processes = []
 
     models = []
-    m = Model('booblik', 'booblik', [-532, 162, 0, 0, 0, 1])
+    m = Model('booblik', 'booblik', [-532, 162, 0, 0, 0, 0])
     models.append(m)
 
     launch_processes.extend(vrp_gz.launch.simulation(world_name, headless))

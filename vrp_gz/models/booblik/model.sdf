@@ -4,14 +4,14 @@
 		<!-- База бублика -->
 		<link name='base_link'>
 			<inertial>
-				<mass>10</mass>
+				<mass>15</mass>
 				<inertia>
-					<ixx>0.41875</ixx>
+					<ixx>0.7875</ixx>
 					<ixy>0</ixy>
 					<ixz>0</ixz>
-					<iyy>0.41875</iyy>
+					<iyy>0.7875</iyy>
 					<iyz>0</iyz>
-					<izz>0.8</izz>
+					<izz>1.5188</izz>
 				</inertia>
 				<pose>0 0 0 0 0 0</pose>
 			</inertial>
@@ -365,8 +365,8 @@
 		<plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
 			<fluid_density>1000</fluid_density>
 			<fluid_level>0.0</fluid_level>
-			<linear_drag>10.0</linear_drag>
-			<angular_drag>6.0</angular_drag>
+			<linear_drag>14.0</linear_drag>
+			<angular_drag>5.0</angular_drag>
 			<buoyancy name="main_body_buoyancy">
 				<link_name>base_link</link_name>
 				<pose>0 0 0.075 0 0 0</pose>
@@ -379,7 +379,7 @@
 			</buoyancy>
 			<wavefield>
 				<size>1000 1000</size>
-				<cell_count>50 50></cell_count>
+				<cell_count>50.0 50.0</cell_count>
 				<wave>
 					<model>PMS</model>
 					<period>5.0</period>

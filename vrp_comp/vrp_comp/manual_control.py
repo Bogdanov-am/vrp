@@ -5,13 +5,7 @@ from std_msgs.msg import Float64
 import pygame
 import threading
 import time
-import vrp_comp.util as util
-from enum import IntEnum
-
-class ThrustMode(IntEnum):
-    H_Mode = 0
-    T_Mode = 1
-    Vector_Mode = 2
+from vrp_comp.util import ThrustMode, vector_thrust_decomposition
 
 MODES = ['H-mode', 'T-mode', 'Vector-mode']
 
@@ -39,7 +33,7 @@ class ManualControl(Node):
         pygame.init()
         pygame.joystick.init()
         while True:
-            for event in pygame.event.get():  # User did something.
+            for event in pygame.event.get():
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == 1:
                         if self.mode < 2:
@@ -63,7 +57,7 @@ class ManualControl(Node):
                 l, r, b = [.0, .0, .0]
 
                 if self.mode == ThrustMode.Vector_Mode:
-                    l, r, b = util.vector_thrust_decomposition(y1, -x1, x2)
+                    l, r, b = vector_thrust_decomposition(y1, -x1, x2)
                 elif self.mode == ThrustMode.T_Mode:
                     l, r, b = [y1, -y1, x2]
                 elif self.mode == ThrustMode.H_Mode:
