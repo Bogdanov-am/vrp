@@ -25,6 +25,7 @@ class ManualControl(Node):
             '/booblik/thrusters/back/thrust',
             10)
 
+
         self.joyThread = threading.Thread(
             target=self.joystickThread, daemon=True).start()
         self.mode = ThrustMode.H_Mode
@@ -73,17 +74,17 @@ class ManualControl(Node):
                 self.right_.publish(right)
                 self.left_.publish(left)
                 self.back_.publish(back)
+
             time.sleep(0.1)
 
 
 def main(args=None):
     rclpy.init(args=args)
-    minimal_subscriber = ManualControl()
-    rclpy.spin(minimal_subscriber)
+    manual = ManualControl()
+    rclpy.spin(manual)
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    minimal_subscriber.stop()
     rclpy.shutdown()
     pygame.quit()
 

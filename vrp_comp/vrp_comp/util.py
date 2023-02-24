@@ -8,6 +8,7 @@ class ThrustMode(IntEnum):
     H_Mode = 0
     T_Mode = 1
     Vector_Mode = 2
+    Direct_Mode = 3
 
 # Function to calculate the thrust on each thruster from power (x, y) and rotation (z)
 def vector_thrust_decomposition(x, y, z):
@@ -61,7 +62,7 @@ def calculate_cog_and_speed(coords, delta_t):
         delta_x = (delta_lon) * R * math.cos(lat_avg)
 
         speeds.append(math.sqrt(delta_x**2 + delta_y**2) / delta_t)
-        unit_vec.append(np.array([delta_lat, delta_lon]))
+        unit_vec.append(np.array([delta_lat, delta_lon * math.cos(lat_avg)]))
 
     avg_speed = float(sum(speeds)) / len(speeds)
 

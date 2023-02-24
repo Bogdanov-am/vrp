@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'manual = vrp_comp.manual_control:main',
             'test = vrp_comp.do_task:main',
+            'first_task = vrp_comp.first_task:main',
         ],
     },
 )
