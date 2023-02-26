@@ -354,7 +354,7 @@
 
     <include>
       <name>mb_marker_buoy_red</name>
-      <pose>-528 191 0 0 1.57 0</pose>
+      <pose>-540 188 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_red</uri>
 
       <plugin name="vrp::PolyhedraBuoyancyDrag"
@@ -394,7 +394,7 @@
 
     <include>
       <name>mb_marker_buoy_black</name>
-      <pose>-528 190 0 0 1.57 0</pose>
+      <pose>-528 200 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_black</uri>
 
       <plugin name="vrp::PolyhedraBuoyancyDrag"
@@ -434,7 +434,7 @@
 
     <include>
       <name>mb_marker_buoy_green</name>
-      <pose>-528 189 0 0 1.57 0</pose>
+      <pose>-517 187 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_green</uri>
 
       <plugin name="vrp::PolyhedraBuoyancyDrag"
@@ -474,7 +474,7 @@
 
     <include>
       <name>mb_marker_buoy_white</name>
-      <pose>-528 188 0 0 1.57 0</pose>
+      <pose>-529 175 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_white</uri>
 
       <plugin name="vrp::PolyhedraBuoyancyDrag"
