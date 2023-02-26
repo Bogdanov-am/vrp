@@ -5,8 +5,8 @@ import math
 
 
 class ThrustMode(IntEnum):
-    Vector_Mode = 0
-    Direct_Mode = 1
+    Direct_Mode = 0
+    Vector_Mode = 1
     H_Mode = 2
     T_Mode = 3
 

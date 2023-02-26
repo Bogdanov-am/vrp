@@ -77,7 +77,7 @@ class DoTask(Node):
                 self.coords, 0.1)
 
             cog = Float64()
-            cog.data = self.cog
+            cog.data = math.degrees(self.cog)
             self.cog_.publish(cog)
 
     def imu_callback(self, msg):
@@ -96,7 +96,7 @@ class DoTask(Node):
             self.yaw = self.yaw + 2 * math.pi
 
         yaw = Float64()
-        yaw.data = self.yaw
+        yaw.data = math.degrees(self.yaw)
         self.yaw_.publish(yaw)
 
     def _taskLoop(self):

@@ -7,7 +7,7 @@ import threading
 import time
 from vrp_comp.util import ThrustMode, vector_thrust_decomposition
 
-MODES = ['H-mode', 'T-mode', 'Vector-mode']
+MODES = ['Direct-Mode', 'Vector-mode', 'H-mode', 'T-mode']
 
 class ManualControl(Node):
     def __init__(self):

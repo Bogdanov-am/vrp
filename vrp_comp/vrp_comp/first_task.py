@@ -5,7 +5,7 @@ from vrp_comp.do_task import DoTask
 class DoFirstTask(DoTask):
     def __init__(self):
         super().__init__('first_task')
-        self.declare_parameter('target_angle', 0.0)
+        self.declare_parameter('target_angle', 90.0)
         self.start()
 
     def task(self, latitude, longitude, cog, hdg, speed, img):
@@ -15,8 +15,8 @@ class DoFirstTask(DoTask):
         :param cog: Направление скорости относительно севера в градусах от -180 до 180; Float
         :param hdg: Направление носа относительно севера в градусах от -180 до 180; Float
         :param speed: Скорость в метрах в секунду; Float
-        :return: Мощность на каждом двигателе {'mode': 1, 'l': (-1,1), 'r': (-1,1), 'b': (-1,1)}
-            или направление {'mode': 0, 'x': (-1,1), 'y': (-1,1), 'z': (-1,1)}
+        :return: Мощность на каждом двигателе {'mode': 0, 'l': (-1,1), 'r': (-1,1), 'b': (-1,1)}
+            или направление {'mode': 1, 'x': (-1,1), 'y': (-1,1), 'z': (-1,1)}
         """
 
         # target_angle - целевой угол в градусах
@@ -35,8 +35,8 @@ class DoFirstTask(DoTask):
         elif delta_angle < -180:
                 delta_angle = target_angle + 360
 
-        threshold = 10 # пороговый угол
-        thrust = 0.5 # значение мощности, когда target_angle больше threshold
+        threshold = 2.5 # пороговый угол
+        thrust = 0.05 # значение мощности, когда target_angle больше threshold
 
         z = 0
         if delta_angle > threshold:
@@ -44,7 +44,7 @@ class DoFirstTask(DoTask):
         elif delta_angle < -threshold:
             z = -thrust
             
-        return {'mode': 1, 'l': z, 'r': z, 'b': z}
+        return {'mode': 0, 'l': z, 'r': z, 'b': z}
 
 
 def main(args=None):
