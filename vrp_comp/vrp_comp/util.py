@@ -3,6 +3,7 @@ import numpy as np
 from enum import IntEnum
 import math
 
+R_earth = 6378100
 
 class ThrustMode(IntEnum):
     Direct_Mode = 0
@@ -49,8 +50,6 @@ def euler_from_quaternion(x, y, z, w):
 
 
 def calculate_cog_and_speed(coords, delta_t):
-    R = 6378100
-
     unit_vec = []
     speeds = []
     for i in range(len(coords)-1):
@@ -58,11 +57,16 @@ def calculate_cog_and_speed(coords, delta_t):
         delta_lon = math.radians(coords[i+1][1] - coords[i][1])
         lat_avg = math.radians((coords[i][0] + coords[i+1][0]) / 2)
 
-        delta_y = (delta_lat) * R
-        delta_x = (delta_lon) * R * math.cos(lat_avg)
+        delta_y = (delta_lat) * R_earth
+        delta_x = (delta_lon) * R_earth * math.cos(lat_avg)
 
-        speeds.append(math.sqrt(delta_x**2 + delta_y**2) / delta_t)
-        unit_vec.append(np.array([delta_lat, delta_lon * math.cos(lat_avg)]))
+        l = math.sqrt(delta_x**2 + delta_y**2)
+        speeds.append( l/ delta_t)
+
+        if l != 0.0:
+            unit_vec.append(np.array([delta_y / l, delta_x / l]))
+        else:
+            unit_vec.append(np.array([0, 0]))
 
     avg_speed = float(sum(speeds)) / len(speeds)
 

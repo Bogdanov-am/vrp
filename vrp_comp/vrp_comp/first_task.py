@@ -31,9 +31,9 @@ class DoFirstTask(DoTask):
         # Вычисляем разницу между текущим курсом и целевым углом
         delta_angle = target_angle - hdg 
         if delta_angle > 180:
-            delta_angle = target_angle - 360
+            delta_angle = delta_angle - 360
         elif delta_angle < -180:
-                delta_angle = target_angle + 360
+                delta_angle = delta_angle + 360
 
         threshold = 2.5 # пороговый угол
         thrust = 0.05 # значение мощности, когда target_angle больше threshold
