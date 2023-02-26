@@ -53,7 +53,7 @@ class DoSecondTask(DoTask):
         if delta_angle > 180:
             delta_angle = delta_angle - 360
         elif delta_angle < -180:
-                delta_angle = delta_angle + 360
+            delta_angle = delta_angle + 360
 
         threshold = 5 # пороговый угол
         forward = 0.6
