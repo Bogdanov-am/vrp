@@ -104,8 +104,8 @@ class DoTask(Node):
             res = self.task(
                 self.latitude,
                 self.longitude,
-                self.cog,
-                self.yaw,
+                math.degrees(self.cog),
+                math.degrees(self.yaw),
                 self.speed,
                 None
             )

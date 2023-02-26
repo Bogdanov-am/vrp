@@ -5,10 +5,10 @@ import math
 
 
 class ThrustMode(IntEnum):
-    H_Mode = 0
-    T_Mode = 1
-    Vector_Mode = 2
-    Direct_Mode = 3
+    Vector_Mode = 0
+    Direct_Mode = 1
+    H_Mode = 2
+    T_Mode = 3
 
 # Function to calculate the thrust on each thruster from power (x, y) and rotation (z)
 def vector_thrust_decomposition(x, y, z):

@@ -37,10 +37,10 @@ class ManualControl(Node):
             for event in pygame.event.get():
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == 1:
-                        if self.mode < 2:
+                        if self.mode < 3:
                             self.mode +=1
                         else:
-                            self.mode = 0
+                            self.mode = 1
                         self.get_logger().info("Changed control mode. Current mode: {:s}".format(MODES[self.mode]))
 
             joystick_count = pygame.joystick.get_count()

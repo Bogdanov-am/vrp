@@ -23,6 +23,8 @@ setup(
             'manual = vrp_comp.manual_control:main',
             'test = vrp_comp.do_task:main',
             'first_task = vrp_comp.first_task:main',
+            'second_task = vrp_comp.second_task:main',
+            'third_task = vrp_comp.third_task:main',
         ],
     },
 )
