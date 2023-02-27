@@ -266,47 +266,27 @@
 
     </gui>
 
-    <plugin
-      filename="gz-sim-physics-system"
-      name="gz::sim::systems::Physics">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics">
     </plugin>
-    <plugin
-      filename="gz-sim-user-commands-system"
-      name="gz::sim::systems::UserCommands">
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands">
     </plugin>
-    <plugin
-      filename="gz-sim-sensors-system"
-      name="gz::sim::systems::Sensors">
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
       <disable_on_drained_battery>true</disable_on_drained_battery>
     </plugin>
-    <plugin
-      filename="gz-sim-imu-system"
-      name="gz::sim::systems::Imu">
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
     </plugin>
-    <plugin
-      filename="gz-sim-magnetometer-system"
-      name="gz::sim::systems::Magnetometer">
+    <plugin filename="gz-sim-magnetometer-system" name="gz::sim::systems::Magnetometer">
     </plugin>
-    <plugin
-      filename="gz-sim-forcetorque-system"
-      name="gz::sim::systems::ForceTorque">
+    <plugin filename="gz-sim-forcetorque-system" name="gz::sim::systems::ForceTorque">
     </plugin>
-    <plugin
-      filename="gz-sim-particle-emitter2-system"
-      name="gz::sim::systems::ParticleEmitter2">
+    <plugin filename="gz-sim-particle-emitter2-system" name="gz::sim::systems::ParticleEmitter2">
     </plugin>
-    <plugin
-      filename="gz-sim-scene-broadcaster-system"
-      name="gz::sim::systems::SceneBroadcaster">
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster">
     </plugin>
-    <plugin
-      filename="gz-sim-contact-system"
-      name="gz::sim::systems::Contact">
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact">
     </plugin>
-    <plugin
-      filename="gz-sim-navsat-system"
-      name="gz::sim::systems::NavSat">
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat">
     </plugin>
 
     <scene>
@@ -357,8 +337,7 @@
       <pose>-540 188 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_red</uri>
 
-      <plugin name="vrp::PolyhedraBuoyancyDrag"
-              filename="libPolyhedraBuoyancyDrag.so">
+      <plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
         <fluid_density>1000</fluid_density>
         <fluid_level>0.0</fluid_level>
         <linear_drag>25.0</linear_drag>
@@ -391,14 +370,17 @@
         </wavefield>
       </plugin>
     </include>
-
     <include>
       <name>mb_marker_buoy_black</name>
       <pose>-528 200 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_black</uri>
 
-      <plugin name="vrp::PolyhedraBuoyancyDrag"
-              filename="libPolyhedraBuoyancyDrag.so">
+      <!-- <joint name="aruco_joint" type="fixed">
+        <child>Aruco::base_link</child>
+        <parent>mb_marker_buoy_black::link</parent>
+      </joint> -->
+
+      <plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
         <fluid_density>1000</fluid_density>
         <fluid_level>0.0</fluid_level>
         <linear_drag>25.0</linear_drag>
@@ -437,8 +419,7 @@
       <pose>-517 187 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_green</uri>
 
-      <plugin name="vrp::PolyhedraBuoyancyDrag"
-              filename="libPolyhedraBuoyancyDrag.so">
+      <plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
         <fluid_density>1000</fluid_density>
         <fluid_level>0.0</fluid_level>
         <linear_drag>25.0</linear_drag>
@@ -477,8 +458,7 @@
       <pose>-529 175 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_marker_buoy_white</uri>
 
-      <plugin name="vrp::PolyhedraBuoyancyDrag"
-              filename="libPolyhedraBuoyancyDrag.so">
+      <plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
         <fluid_density>1000</fluid_density>
         <fluid_level>0.0</fluid_level>
         <linear_drag>25.0</linear_drag>
@@ -517,8 +497,7 @@
       <pose>-528 187 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_round_buoy_orange</uri>
 
-      <plugin name="vrp::PolyhedraBuoyancyDrag"
-              filename="libPolyhedraBuoyancyDrag.so">
+      <plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
         <fluid_density>1000</fluid_density>
         <fluid_level>0.0</fluid_level>
         <linear_drag>25.0</linear_drag>
@@ -529,7 +508,7 @@
           <geometry>
             <sphere>
               <radius>0.25</radius>
-          </sphere>
+            </sphere>
           </geometry>
         </buoyancy>
         <wavefield>
@@ -556,8 +535,7 @@
       <pose>-528 186 0 0 1.57 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/mb_round_buoy_black</uri>
 
-      <plugin name="vrp::PolyhedraBuoyancyDrag"
-              filename="libPolyhedraBuoyancyDrag.so">
+      <plugin name="vrp::PolyhedraBuoyancyDrag" filename="libPolyhedraBuoyancyDrag.so">
         <fluid_density>1000</fluid_density>
         <fluid_level>0.0</fluid_level>
         <linear_drag>25.0</linear_drag>
@@ -568,7 +546,7 @@
           <geometry>
             <sphere>
               <radius>0.25</radius>
-          </sphere>
+            </sphere>
           </geometry>
         </buoyancy>
         <wavefield>
@@ -635,9 +613,7 @@
     </wind>
 
     <!-- Load the plugin for the wind -->
-    <plugin
-      filename="gz-sim-wind-effects-system"
-      name="gz::sim::systems::WindEffects">
+    <plugin filename="gz-sim-wind-effects-system" name="gz::sim::systems::WindEffects">
       <force_approximation_scaling_factor>0.002</force_approximation_scaling_factor>
       <horizontal>
         <magnitude>
@@ -647,8 +623,8 @@
             <period>60</period>
           </sin>
           <noise type="gaussian">
-           <mean>0</mean>
-           <stddev>0.0002</stddev>
+            <mean>0</mean>
+            <stddev>0.0002</stddev>
           </noise>
         </magnitude>
         <direction>
@@ -658,15 +634,15 @@
             <period>20</period>
           </sin>
           <noise type="gaussian">
-           <mean>0</mean>
-           <stddev>0.03</stddev>
+            <mean>0</mean>
+            <stddev>0.03</stddev>
           </noise>
         </direction>
       </horizontal>
       <vertical>
         <noise type="gaussian">
-         <mean>0</mean>
-         <stddev>0.03</stddev>
+          <mean>0</mean>
+          <stddev>0.03</stddev>
         </noise>
       </vertical>
     </plugin>

@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+	<model name='aruco'>
+		<!-- База бублика -->
+		<link name='base_link'>
+			<visual name='visual'>
+				<geometry>
+					<mesh>
+						<uri>file:///model://aruco/meshes/aruco.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<pose>0 0 0 0 0 3.141592654</pose>
+		</link>
+		<static>false</static>
+		<self_collide>false</self_collide>
+	</model>
+</sdf>
