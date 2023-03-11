@@ -3,10 +3,22 @@
 	<model name='aruco'>
 		<!-- База бублика -->
 		<link name='base_link'>
+			<inertial>
+				<mass>0.01</mass>
+				<inertia>
+					<ixx>0.0001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.0001</iyy>
+					<iyz>0</iyz>
+					<izz>0.0001</izz>
+				</inertia>
+				<pose>0 0 0 0 0 0</pose>
+			</inertial>
 			<visual name='visual'>
 				<geometry>
 					<mesh>
-						<uri>file:///model://aruco/meshes/aruco.dae</uri>
+						<uri>file:///model://aruco/meshes/aruco1.dae</uri>
 					</mesh>
 				</geometry>
 			</visual>

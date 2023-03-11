@@ -128,7 +128,7 @@
 				</imu>
 			</sensor>
 			<sensor name='camera' type='camera'>
-				<pose>-0.288468360 0 0.248385619 0 0.190349541 3.141592654</pose>
+				<pose>-0.288468360 0 0.248385619 0 -0.3 3.141592654</pose>
 				<topic>__default__</topic>
 				<update_rate>24</update_rate>
 				<enable_metrics>false</enable_metrics>
