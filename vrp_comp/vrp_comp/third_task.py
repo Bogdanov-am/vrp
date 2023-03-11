@@ -7,6 +7,10 @@ import cv2
 class DoThirdTask(DoTask):
     def __init__(self):
         super().__init__('third_task', img=True)
+
+        self.arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_100)
+        self.arucoParams = cv2.aruco.DetectorParameters_create()
+
         self.start()
 
     def task(self, latitude, longitude, cog, hdg, speed, img):
@@ -22,7 +26,13 @@ class DoThirdTask(DoTask):
 
         # РАСПОЛОЖИТЕ ВАШ КОД ДАЛЕЕ
         if img is not None:
-            cv2.imshow("camera", img)
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            corners, ids, rejected = cv2.aruco.detectMarkers(
+                gray, self.arucoDict, parameters=self.arucoParams)
+            frame = cv2.aruco.drawDetectedMarkers(
+                img, corners, borderColor=(0, 0, 255))
+            
+            cv2.imshow("camera", frame)
             cv2.waitKey(1)
 
         return {
