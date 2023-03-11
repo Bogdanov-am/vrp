@@ -135,7 +135,7 @@
 				<visualize>true</visualize>
 				<camera name='camera'>
 					<pose>0 0 0 0 0 0</pose>
-					<horizontal_fov>1.3962634</horizontal_fov>
+					<horizontal_fov>2.094395102</horizontal_fov>
 					<image>
 						<width>1280</width>
 						<height>720</height>
