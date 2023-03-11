@@ -7,10 +7,13 @@ import threading
 import time
 import vrp_comp.util as util
 import math
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+import cv2 
 
 
 class DoTask(Node):
-    def __init__(self, name='do_task', period=0.1):
+    def __init__(self, name='do_task', period=0.1, img=False):
         super().__init__(name)
         self.right_ = self.create_publisher(
             Float64,
@@ -47,9 +50,18 @@ class DoTask(Node):
             10)
         self.imu_
 
+        if img:
+            self.image_ = self.create_subscription(
+                Image, 
+                '/booblik/sensors/cameras/camera/image_raw', 
+                self.image_callback, 
+                10)
+            self.br = CvBridge()
+
         self.period = period
 
         self.smooth_count = 5
+        self.image = None
 
         self.quaternion = None
         self.coords = []
@@ -98,6 +110,11 @@ class DoTask(Node):
         yaw = Float64()
         yaw.data = math.degrees(self.yaw)
         self.yaw_.publish(yaw)
+    
+    def image_callback(self, data):
+        # Convert ROS Image message to OpenCV image
+        current_frame = self.br.imgmsg_to_cv2(data)
+        self.image = cv2.cvtColor(current_frame, cv2.COLOR_RGB2BGR)
 
     def _taskLoop(self):
         while True:
@@ -107,7 +124,7 @@ class DoTask(Node):
                 math.degrees(self.cog),
                 math.degrees(self.yaw),
                 self.speed,
-                None
+                self.image
             )
             self.send_thrust(res)
             time.sleep(self.period)

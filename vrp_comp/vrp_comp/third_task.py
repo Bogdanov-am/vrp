@@ -1,9 +1,12 @@
 import rclpy
 from vrp_comp.do_task import DoTask
+import vrp_comp.util as util
+import cv2
+
 
 class DoThirdTask(DoTask):
     def __init__(self):
-        super().__init__('third_task')
+        super().__init__('third_task', img=True)
         self.start()
 
     def task(self, latitude, longitude, cog, hdg, speed, img):
@@ -18,8 +21,16 @@ class DoThirdTask(DoTask):
         """
 
         # РАСПОЛОЖИТЕ ВАШ КОД ДАЛЕЕ
-        
-        return {'mode': 1, 'l': 0, 'r': 0, 'b': 0}
+        if img is not None:
+            cv2.imshow("camera", img)
+            cv2.waitKey(1)
+
+        return {
+            'mode': util.ThrustMode.Direct_Mode,
+            'l': 0,
+            'r': 0,
+            'b': 0
+        }
 
 
 def main(args=None):
