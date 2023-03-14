@@ -6,7 +6,7 @@ import cv2
 
 class DoThirdTask(DoTask):
     def __init__(self):
-        super().__init__('third_task', img=True)
+        super().__init__('third_task', img=True, sim=True)
 
         self.arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_100)
         self.arucoParams = cv2.aruco.DetectorParameters_create()

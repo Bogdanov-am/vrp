@@ -1,6 +1,5 @@
 import rclpy
 from rclpy.node import Node
-
 from std_msgs.msg import Float64
 import pygame
 import threading
@@ -65,11 +64,11 @@ class ManualControl(Node):
                     l, r, b = [y1, -y2, .0]
 
                 left = Float64()
-                left.data = l * 20
+                left.data = l
                 right = Float64()
-                right.data = r * 20
+                right.data = r
                 back = Float64()
-                back.data = b * 20
+                back.data = b
 
                 self.right_.publish(right)
                 self.left_.publish(left)

@@ -9,12 +9,13 @@ import vrp_comp.util as util
 import math
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
-import cv2 
+import cv2
 
 
 class DoTask(Node):
-    def __init__(self, name='do_task', period=0.1, img=False):
+    def __init__(self, name='do_task', period=0.1, img=False, sim=False):
         super().__init__(name)
+        self.sim = sim
         self.right_ = self.create_publisher(
             Float64,
             '/booblik/thrusters/right/thrust',
@@ -52,9 +53,9 @@ class DoTask(Node):
 
         if img:
             self.image_ = self.create_subscription(
-                Image, 
-                '/booblik/sensors/cameras/camera/image_raw', 
-                self.image_callback, 
+                Image,
+                '/booblik/sensors/cameras/camera/image_raw',
+                self.image_callback,
                 10)
             self.br = CvBridge()
 
@@ -110,7 +111,7 @@ class DoTask(Node):
         yaw = Float64()
         yaw.data = math.degrees(self.yaw)
         self.yaw_.publish(yaw)
-    
+
     def image_callback(self, data):
         # Convert ROS Image message to OpenCV image
         current_frame = self.br.imgmsg_to_cv2(data)
@@ -140,7 +141,7 @@ class DoTask(Node):
     def send_thrust(self, target):
         l, r, b = [.0, .0, .0]
 
-        if target ==  None:
+        if target == None:
             pass
         elif target['mode'] == util.ThrustMode.Vector_Mode:
             l, r, b = util.vector_thrust_decomposition(
@@ -148,12 +149,16 @@ class DoTask(Node):
         elif target['mode'] == util.ThrustMode.Direct_Mode:
             l, r, b = [target['l'], target['r'], target['b']]
 
+        coeff = 1.0
+        if self.sim:
+            coeff = 20.0
+
         left = Float64()
-        left.data = l * 20.0
+        left.data = l * coeff
         right = Float64()
-        right.data = r * 20.0
+        right.data = r * coeff
         back = Float64()
-        back.data = b * 20.0
+        back.data = b * coeff
 
         self.right_.publish(right)
         self.left_.publish(left)
