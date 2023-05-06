@@ -64,11 +64,11 @@ class ManualControl(Node):
                     l, r, b = [y1, -y2, .0]
 
                 left = Float64()
-                left.data = l
+                left.data = l * 20.0
                 right = Float64()
-                right.data = r
+                right.data = r * 20.0
                 back = Float64()
-                back.data = b
+                back.data = b * 20.0
 
                 self.right_.publish(right)
                 self.left_.publish(left)

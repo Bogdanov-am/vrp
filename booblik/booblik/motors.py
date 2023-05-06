@@ -111,15 +111,15 @@ class MotorsNode(Node):
         self.back_
     
     def left_callback(self, data):
-        self.left = data.data
+        self.left = data.data / 20.0
         self.send_thrust()
     
     def right_callback(self, data):
-        self.right = data.data
+        self.right = data.data / 20.0
         self.send_thrust()
     
     def back_callback(self, data):
-        self.back = data.data
+        self.back = data.data / 20.0
         self.send_thrust()
     
     def send_thrust(self):

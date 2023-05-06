@@ -13,7 +13,7 @@ import cv2
 
 
 class DoTask(Node):
-    def __init__(self, name='do_task', period=0.1, img=False, sim=False):
+    def __init__(self, name='do_task', period=0.1, img=False):
         super().__init__(name)
         self.sim = sim
         self.right_ = self.create_publisher(
@@ -149,9 +149,7 @@ class DoTask(Node):
         elif target['mode'] == util.ThrustMode.Direct_Mode:
             l, r, b = [target['l'], target['r'], target['b']]
 
-        coeff = 1.0
-        if self.sim:
-            coeff = 20.0
+        coeff = 20.0
 
         left = Float64()
         left.data = l * coeff

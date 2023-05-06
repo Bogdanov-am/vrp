@@ -6,7 +6,7 @@ import math
 
 class DoSecondTask(DoTask):
     def __init__(self):
-        super().__init__('second_task', sim=True)
+        super().__init__('second_task')
         self.declare_parameter('longitudes', [150.6739099669496, 150.67403880435694, 150.6741587316573, 150.6740302454607])
         self.declare_parameter('latitudes', [-33.72252723805997, -33.72241893456141, -33.72253715614862, -33.72264554139414])
         self.start()

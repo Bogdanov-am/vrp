@@ -4,7 +4,7 @@ from vrp_comp.do_task import DoTask
 
 class DoFirstTask(DoTask):
     def __init__(self):
-        super().__init__('first_task', sim=True)
+        super().__init__('first_task')
         self.declare_parameter('target_angle', 90.0)
         self.start()
 
