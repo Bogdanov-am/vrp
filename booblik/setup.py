@@ -25,6 +25,7 @@ setup(
     entry_points={
                 'console_scripts': [
                     'motors = booblik.motors:main',
+                    'gpsimu = booblik.gpsimu:main',
                 ],
     },
 )
