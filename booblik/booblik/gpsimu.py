@@ -56,9 +56,9 @@ class GpsConfig:
 class GpsImuNode(Node):
     config: GpsConfig
 
-    def __init__(self, config, name='gpsimu'):
+    def __init__(self, name='gpsimu'):
         super().__init__(name)
-        self.config = config
+        self.config = GpsConfig('COM4', 9600)
         self.left = 0
         self.right = 0
         self.back = 0
