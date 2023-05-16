@@ -5,7 +5,7 @@ import serial
 from threading import Thread
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import NavSatFix
+from sensor_msgs.msg import NavSatFix, Imu
 
 
 format_time = 'BBBB'
@@ -68,6 +68,11 @@ class GpsImuNode(Node):
             '/booblik/sensors/gps/navsat/fix',
             10)
         self.nav_
+        self.imu_ = self.create_publisher(
+            Imu,
+            '/booblik/sensors/imu/imu/data',
+            10)
+        self.imu_
 
         Thread(target=self._readLoop, daemon=True).start()
 
@@ -91,6 +96,12 @@ class GpsImuNode(Node):
     def parsePacket(self, packet: bytearray):
         if packet[1] == 0x59:
             q0, q1, q2, q3 = parseQuat(packet)
+            imu = Imu()
+            imu.orientation.x = q0
+            imu.orientation.y = q1
+            imu.orientation.z = q2
+            imu.orientation.w = q3
+            self.imu_.publish(imu)
         elif packet[1] == 0x57:
             lat, lon = parseLanLon(packet)
             nav = NavSatFix()
