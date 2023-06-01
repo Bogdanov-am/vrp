@@ -15,7 +15,7 @@ import cv2
 class DoTask(Node):
     def __init__(self, name='do_task', period=0.1, img=False):
         super().__init__(name)
-        self.sim = sim
+        
         self.right_ = self.create_publisher(
             Float64,
             '/booblik/thrusters/right/thrust',
