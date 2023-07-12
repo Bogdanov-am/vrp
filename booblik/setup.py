@@ -26,6 +26,7 @@ setup(
                 'console_scripts': [
                     'motors = booblik.motors:main',
                     'gpsimu = booblik.gpsimu:main',
+                    'ping = booblik.ping:main',
                 ],
     },
 )
