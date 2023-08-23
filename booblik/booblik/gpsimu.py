@@ -58,7 +58,7 @@ class GpsImuNode(Node):
 
     def __init__(self, name='gpsimu'):
         super().__init__(name)
-        self.config = GpsConfig('COM4', 9600)
+        self.config = GpsConfig('/dev/serial0', 9600)
         self.nav_ = self.create_publisher(
             NavSatFix,
             '/booblik/sensors/gps/navsat/fix',

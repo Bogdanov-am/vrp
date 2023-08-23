@@ -1,6 +1,6 @@
-int32 distance
+uint32 distance
 int16 confidence
-int16 scan_start
-int16 scan_length
+uint16 scan_start
+uint16 scan_length
 int16 transmit_duration
 int16 gain_setting
