@@ -73,7 +73,6 @@ class GpsImuNode(Node):
 
         while True:
             buffer.extend(ser.read(22))
-            print(len(ser))
             index = buffer.find(0x55, 1)
             while index != -1 and index:
                 packet = buffer[0:index]
