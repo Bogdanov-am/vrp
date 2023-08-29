@@ -30,20 +30,12 @@ def parseAngle(packet: bytearray):
     return roll, pitch, yaw
 
 
-def parseAngle(packet: bytearray):
-    s = struct.unpack(format_angle, packet)
-    roll = s[2] / 32768 * 180
-    pitch = s[3] / 32768 * 180
-    yaw = s[4] / 32768 * 180
-    return roll, pitch, yaw
-
-
 def parseQuat(packet: bytearray):
     s = struct.unpack(format_angle, packet)
-    q0 = s[2] / 32768
-    q1 = s[3] / 32768
-    q2 = s[4] / 32768
-    q3 = s[5] / 32768
+    q1 = s[2] / 32768
+    q2 = s[3] / 32768
+    q3 = s[4] / 32768
+    q0 = s[5] / 32768
     return q0, q1, q2, q3
 
 
@@ -81,6 +73,7 @@ class GpsImuNode(Node):
 
         while True:
             buffer.extend(ser.read(22))
+            print(len(ser))
             index = buffer.find(0x55, 1)
             while index != -1 and index:
                 packet = buffer[0:index]

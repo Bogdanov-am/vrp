@@ -41,7 +41,7 @@ class DoTask(Node):
         self.nav_ = self.create_subscription(
             NavSatFix,
             '/booblik/sensors/gps/navsat/fix',
-            self.nav_callvack,
+            self.nav_callback,
             10)
         self.nav_
         self.imu_ = self.create_subscription(
@@ -51,11 +51,12 @@ class DoTask(Node):
             10)
         self.imu_
 
-        if img:
+        self.img = img
+        if self.img:
             self.image_ = self.create_subscription(
                 Image,
                 '/booblik/sensors/cameras/camera/image_raw',
-                self.image_callback,
+                self.ros_image_callback,
                 10)
             self.br = CvBridge()
 
@@ -74,10 +75,13 @@ class DoTask(Node):
         self.yaw = 0
 
     def start(self):
+        if self.img:
+            self.imageThread = threading.Thread(
+                target=self.image_callback, daemon=True).start()
         self.taskThread = threading.Thread(
             target=self._taskLoop, daemon=True).start()
 
-    def nav_callvack(self, msg):
+    def nav_callback(self, msg):
         self.coords.append([msg.latitude, msg.longitude])
         self.latitude = msg.latitude
         self.longitude = msg.longitude
@@ -112,7 +116,27 @@ class DoTask(Node):
         yaw.data = math.degrees(self.yaw)
         self.yaw_.publish(yaw)
 
-    def image_callback(self, data):
+    def image_callback(self):
+        import cv2
+        cap = cv2.VideoCapture("rtspsrc location=rtsp://admin:a123456789@192.168.13.64:554/ISAPI/Streaming/Channels/102 latency=50 ! decodebin ! videoconvert ! appsink",
+                            cv2.CAP_GSTREAMER)
+
+        print(cap.isOpened(), cv2.CAP_GSTREAMER)
+
+        while True:
+            # Получение кадра
+            ok, img = cap.read()
+
+            # Если кадр был получен, то выводим его в окне
+            if ok:
+                self.image = img
+                # cv2.imshow('buoy', img)
+                # cv2.waitKey(1)
+            else:
+                print('Ошибка чтения')
+                continue
+
+    def ros_image_callback(self, data):
         # Convert ROS Image message to OpenCV image
         current_frame = self.br.imgmsg_to_cv2(data)
         self.image = cv2.cvtColor(current_frame, cv2.COLOR_RGB2BGR)
