@@ -13,7 +13,7 @@ class HTSensor(Node):
 
 
     def __init__(self):
-        super().__init__('HT_sensor')
+        super().__init__('ht_sensor')
         self.tx_ = self.create_publisher(
             UInt8MultiArray,
             '/booblik/rs485Rx',
