@@ -85,7 +85,7 @@ class MotorsNode(Node):
         
         self.driver = TroykaMotorDriver(MotorsConfig(
             MotorConfig(0, 1),
-            MotorConfig(1, 1),
+            MotorConfig(1, -1),
             MotorConfig(2, 1),
         ), freq=500)
 

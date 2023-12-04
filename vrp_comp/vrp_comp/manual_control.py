@@ -24,14 +24,18 @@ class ManualControl(Node):
             '/booblik/thrusters/back/thrust',
             10)
 
+        pygame.init()
+        pygame.joystick.init()
 
         self.joyThread = threading.Thread(
             target=self.joystickThread, daemon=True).start()
         self.mode = ThrustMode.H_Mode
 
+        self.keyboardThread = threading.Thread(
+            target=self.keyboardControlThread, daemon=True).start()
+
+
     def joystickThread(self):
-        pygame.init()
-        pygame.joystick.init()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.JOYBUTTONDOWN:
@@ -75,6 +79,106 @@ class ManualControl(Node):
                 self.back_.publish(back)
 
             time.sleep(0.1)
+
+
+    def keyboardControlThread(self):
+        def update_axis(axis, shift, max):
+            if(axis > 0.0):
+                axis = axis - shift
+            elif(axis < 0.0):
+                axis = axis + shift
+
+            if(axis > max):
+                axis = max
+            elif(axis < -max):
+                axis = -max
+
+            return axis
+            
+        def shift_axis(axis, shift, max):
+            axis = axis + shift
+            if(axis > max):
+                axis = max
+            elif(axis < -max):
+                axis = -max
+            
+            return axis
+
+
+        x_axis_emulate = 0.0
+        y_axis_emulate = 0.0
+        axis_max_value = 100.0
+        joystick_count = pygame.joystick.get_count()
+        screen = None
+        clock = None
+
+        white_color = (255,255, 255)
+        green_color = (0, 255, 0)
+        blue_color = (0, 0, 255)
+        red_color = (255, 0, 0)
+
+        FPS = 60
+        SCREEN_X_SIZE = 400
+        SCREEN_Y_SIZE = 400
+        if (joystick_count == 0):
+            screen = pygame.display.set_mode((SCREEN_X_SIZE, SCREEN_Y_SIZE))
+            clock = pygame.time.Clock()
+            pygame.display.set_caption("Keyboard control")
+        else:
+            exit()
+        while(1):
+            shift = 1.0
+
+            #back to 0
+            x_axis_emulate = update_axis(x_axis_emulate, shift, axis_max_value)
+            y_axis_emulate = update_axis(y_axis_emulate, shift, axis_max_value)
+
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_LEFT]:
+                x_axis_emulate = shift_axis(x_axis_emulate, -shift * 2, axis_max_value)
+            elif keys[pygame.K_RIGHT]:
+                x_axis_emulate = shift_axis(x_axis_emulate, shift * 2, axis_max_value)
+            if keys[pygame.K_UP]:
+                y_axis_emulate = shift_axis(y_axis_emulate, shift * 2, axis_max_value)
+            elif keys[pygame.K_DOWN]:
+                y_axis_emulate = shift_axis(y_axis_emulate, -shift * 2, axis_max_value)
+            
+            screen.fill(white_color)
+
+
+            x_emulate_shift = (x_axis_emulate / axis_max_value) * (SCREEN_X_SIZE / 2)
+            y_emulate_shift = (y_axis_emulate / axis_max_value) * (SCREEN_X_SIZE / 2)
+
+            #draw lines
+            pygame.draw.line(screen, (0,0,0), (0, SCREEN_X_SIZE / 2), (SCREEN_X_SIZE, SCREEN_X_SIZE / 2))
+            pygame.draw.line(screen, (0,0,0), (SCREEN_X_SIZE / 2, 0), (SCREEN_X_SIZE / 2, SCREEN_X_SIZE))
+
+            #draw axis value
+            pygame.draw.circle(screen, red_color, 
+                            (SCREEN_X_SIZE / 2 + x_emulate_shift,
+                              SCREEN_Y_SIZE / 2), 8)
+            pygame.draw.circle(screen, blue_color, 
+                            (SCREEN_X_SIZE / 2,
+                              SCREEN_Y_SIZE / 2 - y_emulate_shift), 7)
+            
+
+            l, r, b = [y_axis_emulate / axis_max_value, 
+                       -(y_axis_emulate / axis_max_value), 
+                       x_axis_emulate / axis_max_value]
+            
+            left = Float64()
+            left.data = l * 20.0
+            right = Float64()
+            right.data = r * 20.0
+            back = Float64()
+            back.data = b * 20.0
+            if (pygame.joystick.get_count() == 0):
+                self.right_.publish(right)
+                self.left_.publish(left)
+                self.back_.publish(back)
+
+            pygame.display.update()
+            clock.tick(FPS)
 
 
 def main(args=None):
