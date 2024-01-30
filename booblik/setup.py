@@ -26,6 +26,7 @@ setup(
                 'console_scripts': [
                     'motors = booblik.motors:main',
                     'gpsimu = booblik.gpsimu:main',
+                    'lidar = booblik.lidar:main',
                     'QMC5883L = booblik.QMC5883L:main',
                     'ping = booblik.ping:main',
                     'ws_m181 = booblik.ws_m181:main',
