@@ -26,12 +26,12 @@ class LidarShowNode(Node):
                 self.cache_range,
                 c=self.cache_intensities,
                 cmap='autumn', s=5)
-            ax.set_ylim((0, 3))
+            max_range = 3
+            ax.set_ylim((0, max_range))
             plt.get_current_fig_manager().set_window_title('Лидар')
             cbar = plt.colorbar(self.sc, shrink=0.7, aspect=20)
             self.sc.set_clim(0, 1)
             
-            ax.set_yticks(np.arange(0, 3, 0.5))
             ax.set_xticks(np.linspace(0, 2*np.pi, 36, endpoint=False))
             ax.set_theta_offset(np.pi / 2)
             ax.set_theta_direction(-1)
