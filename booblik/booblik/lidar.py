@@ -41,6 +41,7 @@ class LidarNode(Node):
         buffer = bytearray()
         # Установка частоты вращения лидара с помощью команды
         ser.write('LSRPM:{:d}H\n\r'.format(self.freq*60).encode('ascii'))
+        ser.write('LOCONH\n\r'.format(self.freq*60).encode('ascii'))
 
         # Кольцевой буфер для чтения пакетов байт с последовательного порта
         while True:
@@ -74,6 +75,7 @@ class LidarNode(Node):
             crc_calc = angle + length
             for i in range(length):
                 crc_calc += data[i]
+                crc_calc %= 65536
                 # Расчет расстояния и интенсивности сигнала
                 # Маскирование и масштабирование данных расстояния
                 distances[i] = (data[i] & 0x1FFF) / 100
@@ -95,7 +97,7 @@ class LidarNode(Node):
                 laser_scan.range_max = 30.  # Максимальное расстояние сканирования
                 laser_scan.ranges = distances.tolist()  # Список измеренных расстояний
                 laser_scan.intensities = strengths.tolist()  # Список интенсивностей
-                # Публикация данных сканирования
+                # Публикация данных сканирования в  ROS топик
                 self.lidar_.publish(laser_scan)
 
 

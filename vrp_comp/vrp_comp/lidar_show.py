@@ -15,32 +15,46 @@ class LidarShowNode(Node):
             10)
         # Инициализация данных для визуализации
         self.cache_theta = np.array([])
-        self.cashe_r = np.array([])
-        
+        self.cache_range = np.array([])
+        self.cache_intensities = np.array([])
+
         # Настройка отображения графика в полярных координатах
-        _, ax = plt.subplots(subplot_kw={'polar': True})
-        self.line, = ax.plot(self.cache_theta, self.cashe_r, 'ro', markersize=1)
-        ax.set_ylim((0, 3))
-        plt.get_current_fig_manager().set_window_title('Лидар')
-        ax.set_yticks(np.arange(0, 3, 0.5))
-        ax.set_xticks(np.linspace(0, 2*np.pi, 36, endpoint=False))
-        ax.set_theta_offset(np.pi / 2)
+        with plt.style.context('dark_background'):
+            _, ax = plt.subplots(subplot_kw={'polar': True})
+            self.sc = ax.scatter(
+                self.cache_theta,
+                self.cache_range,
+                c=self.cache_intensities,
+                cmap='autumn', s=5)
+            ax.set_ylim((0, 3))
+            plt.get_current_fig_manager().set_window_title('Лидар')
+            cbar = plt.colorbar(self.sc)
+            self.sc.set_clim(0, 1)
+            
+            ax.set_yticks(np.arange(0, 3, 0.5))
+            ax.set_xticks(np.linspace(0, 2*np.pi, 36, endpoint=False))
+            ax.set_theta_offset(np.pi / 2)
 
     def _lidar_callback(self, msg: LaserScan):
         # Кэширование данных для отображения их на графике
         length = len(msg.ranges)
         angles = np.linspace(msg.angle_min, msg.angle_max, length)
-        
+
         self.cache_theta = np.concatenate([self.cache_theta, angles])
-        self.cashe_r = np.concatenate([self.cashe_r, msg.ranges])
+        self.cache_range = np.concatenate([self.cache_range, msg.ranges])
+        self.cache_intensities = np.concatenate(
+            [self.cache_intensities, msg.intensities])
 
         # Очистка кэша если прошло одно полное вращение
         if msg.angle_min == 0:
-            self.line.set_xdata(-self.cache_theta)
-            self.line.set_ydata(self.cashe_r)
+            self.sc.set_offsets(np.c_[-self.cache_theta, self.cache_range])
+            self.sc.set_array(self.cache_intensities/5)
             self.cache_theta = []
-            self.cashe_r = []
+            self.cache_range = []
+            self.cache_intensities = []
             plt.pause(0.001)
+            
+
 
 def main(args=None):
     rclpy.init(args=args)
