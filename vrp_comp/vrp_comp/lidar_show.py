@@ -28,12 +28,14 @@ class LidarShowNode(Node):
                 cmap='autumn', s=5)
             ax.set_ylim((0, 3))
             plt.get_current_fig_manager().set_window_title('Лидар')
-            cbar = plt.colorbar(self.sc)
+            cbar = plt.colorbar(self.sc, shrink=0.7, aspect=20)
             self.sc.set_clim(0, 1)
             
             ax.set_yticks(np.arange(0, 3, 0.5))
             ax.set_xticks(np.linspace(0, 2*np.pi, 36, endpoint=False))
             ax.set_theta_offset(np.pi / 2)
+            ax.set_theta_direction(-1)
+            plt.subplots_adjust(left=0.06, right=0.94, top=0.94, bottom=0.06)
 
     def _lidar_callback(self, msg: LaserScan):
         # Кэширование данных для отображения их на графике
@@ -47,7 +49,7 @@ class LidarShowNode(Node):
 
         # Очистка кэша если прошло одно полное вращение
         if msg.angle_min == 0:
-            self.sc.set_offsets(np.c_[-self.cache_theta, self.cache_range])
+            self.sc.set_offsets(np.c_[self.cache_theta, self.cache_range])
             self.sc.set_array(self.cache_intensities/5)
             self.cache_theta = []
             self.cache_range = []
