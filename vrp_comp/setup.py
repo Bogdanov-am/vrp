@@ -25,6 +25,7 @@ setup(
             'first_task = vrp_comp.first_task:main',
             'second_task = vrp_comp.second_task:main',
             'third_task = vrp_comp.third_task:main',
+            'lidar_show = vrp_comp.lidar_show:main'
         ],
     },
 )
