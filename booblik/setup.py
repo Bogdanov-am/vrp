@@ -27,6 +27,7 @@ setup(
                     'motors = booblik.motors:main',
                     'gpsimu = booblik.gpsimu:main',
                     'lidar = booblik.lidar:main',
+                    'camera = booblik.rtsp_camera:main',
                     'QMC5883L = booblik.QMC5883L:main',
                     'ping = booblik.ping:main',
                     'ws_m181 = booblik.ws_m181:main',
